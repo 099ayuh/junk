@@ -1,5 +1,7 @@
 {{> navbar}}
-
+{{#if msg}}
+<h2 class="text-xl text-center p-5 font-mono font-bold">{{msg}}</h2>
+{{else}}
 {{#if genreName}}
 <h1
     class="md:text-start text-center text-5xl font-mono font-bold text-gray-700 px-5 py-5 hover:underline shadow-xl cursor-pointer sticky bg-white top-0 left-0 z-50">
@@ -104,3 +106,4 @@
         prevEle.classList.toggle('inline-block')
     }
 </script>
+{{/if}}

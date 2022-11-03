@@ -1,4 +1,7 @@
-{{> navbar}}
+{{> navbarTV}}
+{{#if msg}}
+<h2 class="text-xl text-center p-5 font-mono font-bold">{{msg}}</h2>
+{{else}}
 
 {{#if genreName}}
 <h1
@@ -78,25 +81,30 @@
 </div>
 
 <div class="flex flex-row w-full justify-center items-center mb-5">
-    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center" style="border: 1px solid black;"><a
-            href="tvSeries/{{getPrevPage DataAPI.page}}"><< prev</a></div>
-    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center" style="border: 1px solid black;" id="prevelement"><a
-            href="tvSeries/{{getPrevPage DataAPI.page}}">{{getPrevPage DataAPI.page}}</a></div>
-    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-900  flex justify-center items-center" style="border: 1px solid black;"><a
-            href="tvSeries/{{DataAPI.page}}">{{DataAPI.page}}</a></div>
-    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center" style="border: 1px solid black;"><a
-            href="tvSeries/{{getNextPage DataAPI.page}}">{{getNextPage DataAPI.page}}</a></div>
-    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center" style="border: 1px solid black;"><a
-            href="">....</a></div>
-    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center" style="border: 1px solid black;"><a
-            href="tvSeries/{{getNextPage DataAPI.page}}">next >></a></div>
+    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center"
+        style="border: 1px solid black;"><a href="tvSeries/{{getPrevPage DataAPI.page}}">
+            << prev</a>
+    </div>
+    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center"
+        style="border: 1px solid black;" id="prevelement"><a href="tvSeries/{{getPrevPage DataAPI.page}}">{{getPrevPage
+            DataAPI.page}}</a></div>
+    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-900  flex justify-center items-center"
+        style="border: 1px solid black;"><a href="tvSeries/{{DataAPI.page}}">{{DataAPI.page}}</a></div>
+    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center"
+        style="border: 1px solid black;"><a href="tvSeries/{{getNextPage DataAPI.page}}">{{getNextPage
+            DataAPI.page}}</a></div>
+    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center"
+        style="border: 1px solid black;"><a href="">....</a></div>
+    <div class="w-auto px-3 h-[40px] cursor-pointer bg-orange-500 flex justify-center items-center"
+        style="border: 1px solid black;"><a href="tvSeries/{{getNextPage DataAPI.page}}">next >></a></div>
 </div>
 
 <script>
     let prevEle = document.getElementById('prevelement');
-    if(prevEle.innerText == '1'){
+    if (prevEle.innerText == '1') {
         prevEle.classList.toggle('hidden')
     } else {
         prevEle.classList.toggle('inline-block')
     }
 </script>
+{{/if}}

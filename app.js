@@ -15,7 +15,7 @@ app.engine('hbs', exphbs.engine({
     defaultLayout: 'main',
     extname: '.hbs',
     helpers: {
-        number: function() {
+        number: function () {
             return 1;
         },
         getNextPage: function (page) {
@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
         .then(response => response.json())
         .then(data => {
             res.render('home', {
-                title: 'home',
+                title: 'imovie',
                 DataAPI: data
                 // ImageAPI : imgapi
             });
@@ -79,7 +79,7 @@ async function get_movie_trailer(id) {
     }
 }
 
-async function get_similar_movies(id,language) {
+async function get_similar_movies(id, language) {
     try {
 
         const resp = await fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=${language}&page=1`)
@@ -108,7 +108,7 @@ app.get('/find/:id', (req, res) => {
                 .then(resp => resp.json())
                 .then(async (result) => {
                     const video_data = await get_movie_trailer(result.id);
-                    const similar_data = await get_similar_movies(result.id,'en-US');
+                    const similar_data = await get_similar_movies(result.id, 'en-US');
                     // console.log(video_data)
                     // console.log('similar',similar_data)
                     res.render('detail', {
@@ -148,7 +148,7 @@ app.get('/tvSeries/detail/:id', (req, res) => {
                     }
                     console.log(resultData)
                     res.render('tvdetails', {
-                        title: data.id,
+                        title: data.name,
                         DataAPI: data,
                         videodata: resultData,
                     })
@@ -166,14 +166,48 @@ app.get('/tvSeries/detail/:id', (req, res) => {
 app.post('/search', (req, res) => {
     const name = req.body.keywords;
     console.log(name)
-    let url = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}&query=${name}`;
+    //     https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&query=stranger%20things&page=1&include_adult=false
+    let url = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}&query=${name} `;
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            res.render('search', {
-                title: name,
-                DataAPI: data
-            });
+            if (data.results.length === 0) {
+                res.render('search', {
+                    title: 'not found',
+                    msg: 'requested movie/tv_series is not found 🥲'
+                });
+            } else {
+                res.render('search', {
+                    title: name,
+                    DataAPI: data
+                });
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+app.post('/search/tv', (req, res) => {
+    const name = req.body.keywords;
+    console.log(name)
+    //     https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&query=stranger%20things&page=1&include_adult=false
+    let url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${name} `;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.results.length === 0) {
+                res.render('tvSeries', {
+                    title: 'not found',
+                    msg: 'requested movie/tv_series is not found 🥲'
+                });
+            } else {
+                console.log('got output')
+                res.render('tvSeries', {
+                    title: name,
+                    DataAPI: data
+                });
+            }
         })
         .catch((err) => {
             console.log(err);
@@ -293,6 +327,9 @@ app.get('/bollywood/:page', (req, res) => {
         });
 })
 
+app.get('*', (req, res) => {
+    res.render('404notfound');
+})
 
 
 // listioning on port
