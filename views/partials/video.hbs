@@ -1,0 +1,14 @@
+<style>
+    .vidbody::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+<h1 class="text-5xl font-mono font-bold text-center text-white">Trailers</h1>
+<div class="flex gap-3 justify-start m-2 items-center overflow-x-scroll vidbody">
+    {{#each videodata}}
+    <iframe width="560" class="rounded-xl" height="315" src="https://www.youtube.com/embed/{{this.key}}"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    {{/each}}
+</div>

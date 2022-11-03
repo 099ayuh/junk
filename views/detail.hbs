@@ -1,0 +1,78 @@
+{{> navbar}}
+<div class="w-full h-auto text-white relative outline-none pb-5"
+    style="background: linear-gradient(rgba(24, 24, 24, 0.598), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/original/{{DataAPI.backdrop_path}}'); background-position:center; background-size: cover;">
+    <div class="w-full flex flex-row pt-5 justify-start">
+        <img class="shadow-inner z-30 top-[11.886056971514243vh] md:top-[35vh] md:w-[250px] md:h-[400px] w-[100px] h-[150px] left-0 mx-7 md:mx-9 rounded-lg media-poster"
+            src="https://image.tmdb.org/t/p/w1280{{DataAPI.poster_path}}" alt="">
+        <div class="text-start">
+            <h1 class="text-4xl md:text-5xl font-sans font-bold">{{DataAPI.title}}</h1>
+            <p class="px-[6px] italic font pt-3 font-extrabold"
+                style="font-family:Verdana, Geneva, Tahoma, sans-serif;">{{DataAPI.tagline}}</p>
+            <p class="text-xs md:text-2xl font-mono font-light px-[6px]">{{DataAPI.release_date}} ({{DataAPI.status}})
+            </p>
+            <div class="flex px-4 pt-3 flex-1 gap-3 list-none font-serif font-thin">
+                <div class="text-green-400 font-serif font-thin">
+                    <li>langauges </li>
+                    <li>length </li>
+                    <li>Rate </li>
+                    <li>Budget </li>
+                    <li>Release Date</li>
+                </div>
+                <div>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                </div>
+                <div>
+                    <li>
+                        {{#each DataAPI.spoken_languages}}
+                        {{this.name}}
+                        {{/each}}
+                    </li>
+                    <li>{{DataAPI.runtime}} min.</li>
+                    <li>{{DataAPI.vote_average}}</li>
+                    <li>$ {{DataAPI.budget}}</li>
+                    <li>{{DataAPI.release_date}}</li>
+                </div>
+            </div>
+            <div class="pt-5 genres font-mono">
+                <h2 class="text-4xl font-bold">Genres</h2>
+                <ul class="px-8" style="list-style-type:disc;">
+                    {{#each DataAPI.genres}}
+                    <li>{{this.name}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="pt-5 font-mono">
+                <h2 class="pb-3 text-4xl font-bold">Overview</h2>
+                <p class="px-3">{{DataAPI.overview}}</p>
+            </div>
+        </div>
+    </div>
+    {{!-- <div class="pt-5 trailer">
+        <h2 class="pb-3 text-4xl font-bold font-mono">Trailer</h2>
+        {{#each videodata}}
+        <div class="flex gap-3 justify-start m-2 items-center overflow-x-scroll vidbody">
+            <iframe class="rounded-xl" src="https://www.youtube.com/embed/{{videodata}}" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            <style>
+                .vidbody::-webkit-scrollbar {
+                    display: none;
+                }
+
+                @media screen only and (max-width: 768) {
+                    iframe {}
+                }
+            </style>
+        </div>
+        {{/each}}
+    </div> --}}
+    <div class="px-4 py-5 z-50">
+        {{> video}}
+    </div>
+</div>
+{{> similarMovies}}
