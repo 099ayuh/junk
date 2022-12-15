@@ -29,4 +29,4 @@ npm run start
 Open [http://localhost:3001](http://localhost:3001) and take a look around.
 
 ## or you can try Live Demo as well
-Open [Live Demo](https://iammovieapp.herokuapp.com/) and take a Demo
+Open [Live Demo](https://imovieapp.onrender.com) and take a Demo
